@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>J人秘書｜都蘭行程快速規劃</title>
+<meta name="description" content="給安排都蘭行程的你——點一點，幾分鐘搞定停留時間、遊程安排與報價。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7EF;
+  --surface:#FFFFFF;
+  --surface-2:#F3ECDD;
+  --ink:#2B2621;
+  --ink-soft:#786F62;
+  --ink-faint:#AA9F8E;
+  --line:#E6DCC7;
+  --line-strong:#D8CCAF;
+  --accent:#CC5A2A;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#F5DFC7;
+  --teal:#3B6F63;
+  --teal-soft:#E2ECE5;
+  --stamp:#A8402F;
+  --danger:#C24A3B;
+  --radius-lg:22px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --shadow-sm:0 1px 3px rgba(43,38,33,.07);
+  --shadow-md:0 10px 30px rgba(43,38,33,.10);
+  --dot-grid:rgba(43,38,33,.05);
+  --maxw:1180px;
+  --font-display:'Noto Serif TC','Noto Sans TC',-apple-system,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#171310;
+    --surface:#211C18;
+    --surface-2:#2B2521;
+    --ink:#F1EAE0;
+    --ink-soft:#B9AE9F;
+    --ink-faint:#847969;
+    --line:#3A332C;
+    --line-strong:#4A4137;
+    --accent:#E77C45;
+    --accent-ink:#1A1310;
+    --accent-soft:#3D2C1D;
+    --teal:#6FA697;
+    --teal-soft:#1F2B26;
+    --stamp:#D97B65;
+    --dot-grid:rgba(241,234,224,.05);
+    --shadow-sm:0 1px 3px rgba(0,0,0,.3);
+    --shadow-md:0 10px 30px rgba(0,0,0,.45);
+  }
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:radial-gradient(circle at 1px 1px, var(--dot-grid) 1.2px, transparent 0);
+  background-size:24px 24px;
+  color:var(--ink);
+  font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;}
+input,select,textarea{font-family:inherit;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+a{color:inherit;}
+::selection{background:var(--accent-soft);color:var(--ink);}
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px dashed var(--line-strong);
+}
+.topbar-inner{
+  max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;letter-spacing:.02em;}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--accent-ink);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex-shrink:0;
+  transform:rotate(-4deg);box-shadow:var(--shadow-sm);
+  font-family:var(--font-display);
+}
+.brand-sub{font-size:12px;font-weight:500;color:var(--ink-soft);}
+.progress-steps{display:flex;gap:9px;align-items:center;position:relative;padding:0 2px;}
+.progress-steps::before{
+  content:'';position:absolute;left:6px;right:6px;top:50%;height:1px;
+  background:repeating-linear-gradient(to right, var(--line-strong) 0 3px, transparent 3px 6px);
+  z-index:0;
+}
+.pstep{
+  width:11px;height:11px;border-radius:50%;background:var(--surface);transition:.2s;
+  border:1.5px solid var(--line-strong);padding:0;position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;font-size:7px;color:transparent;
+}
+.pstep:hover{border-color:var(--accent);transform:scale(1.15);}
+.pstep.done{background:var(--teal);border-color:var(--teal);}
+.pstep.done::after{content:'✓';font-size:7px;color:#fff;}
+.pstep.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+.cart-btn{
+  display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);
+  border:none;border-radius:999px;padding:9px 16px 9px 12px;font-weight:700;font-size:13.5px;
+  box-shadow:var(--shadow-sm);transition:.15s;
+}
+.cart-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.cart-btn .badge{
+  background:var(--accent);color:var(--accent-ink);border-radius:999px;min-width:20px;height:20px;
+  display:flex;align-items:center;justify-content:center;font-size:11.5px;padding:0 5px;
+}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 12px;position:relative;overflow:hidden;}
+.hero-ornament{
+  position:absolute;top:-10px;right:0;width:220px;opacity:.55;pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;background:var(--teal-soft);color:var(--teal);
+  font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:999px;margin-bottom:18px;letter-spacing:.03em;
+  border:1px dashed color-mix(in srgb, var(--teal) 40%, transparent);
+}
+h1.hero-title{
+  font-family:var(--font-display);font-size:clamp(28px,4.2vw,44px);font-weight:900;margin:0 0 12px;
+  letter-spacing:-.01em;position:relative;z-index:1;
+}
+.hero-title em{font-style:normal;color:var(--accent);}
+.hero-desc{font-size:16px;color:var(--ink-soft);max-width:560px;margin:0 0 8px;position:relative;z-index:1;}
+
+/* ---------- generic section shell ---------- */
+.section{padding:40px 0;border-top:1px dashed var(--line-strong);}
+.section:first-of-type{border-top:none;}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap;}
+.section-title{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:900;letter-spacing:.02em;}
+.step-no{
+  width:27px;height:27px;border-radius:50%;background:var(--ink);color:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;flex-shrink:0;
+  position:relative;transform:rotate(-4deg);font-family:var(--font-display);
+}
+.step-no::after{
+  content:'';position:absolute;inset:-4px;border:1.5px dashed var(--line-strong);border-radius:50%;
+}
+.section-sub{font-size:13px;color:var(--ink-faint);}
+
+/* ---------- chips ---------- */
+.chiprow{display:flex;flex-wrap:wrap;gap:10px;}
+.chip{
+  border:1.5px solid var(--line);background:var(--surface);color:var(--ink);
+  padding:12px 18px;border-radius:999px;font-size:14.5px;font-weight:700;
+  display:flex;flex-direction:column;align-items:flex-start;gap:2px;transition:.15s;
+  min-width:104px;box-shadow:var(--shadow-sm);
+}
+.chip small{font-weight:500;color:var(--ink-faint);font-size:11.5px;}
+.chip:hover{border-color:var(--accent);transform:translateY(-1px);}
+.chip.selected{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);box-shadow:var(--shadow-md);}
+.chip.selected small{color:var(--accent-ink);opacity:.85;}
+.chip.tiny{padding:8px 14px;font-size:13px;min-width:0;flex-direction:row;box-shadow:none;}
+
+.stepper{display:flex;align-items:center;gap:14px;}
+.stepper button{
+  width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);
+  font-size:18px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:center;
+  transition:.15s;
+}
+.stepper button:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px);}
+.stepper button:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+.stepper .val{font-size:19px;font-weight:800;min-width:64px;text-align:center;}
+
+.budget-readout{
+  margin-top:16px;display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-soft);
+  background:var(--surface-2);padding:10px 16px;border-radius:var(--radius-sm);width:fit-content;
+}
+.budget-readout b{color:var(--ink);font-size:15px;}
+
+/* ---------- mode cards ---------- */
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mode-card{
+  text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:var(--radius-lg);
+  padding:24px;display:flex;flex-direction:column;gap:10px;transition:.15s;position:relative;
+  box-shadow:var(--shadow-sm);overflow:hidden;
+}
+.mode-card::before{
+  content:'';position:absolute;top:0;left:24px;width:40px;height:6px;background:var(--line-strong);
+  border-radius:0 0 4px 4px;transition:.15s;
+}
+.mode-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.mode-card.selected{border-color:var(--accent);background:var(--accent-soft);box-shadow:var(--shadow-md);}
+.mode-card.selected::before{background:var(--accent);}
+.mode-check{
+  position:absolute;top:16px;right:16px;width:26px;height:26px;border-radius:50%;background:var(--accent);
+  color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;
+  box-shadow:var(--shadow-sm);
+}
+.mode-icon-wrap{
+  width:56px;height:56px;border-radius:16px;background:var(--surface-2);display:flex;align-items:center;
+  justify-content:center;font-size:28px;
+}
+.mode-name{font-size:18px;font-weight:900;font-family:var(--font-display);}
+.mode-desc{font-size:13.5px;color:var(--ink-soft);}
+.mode-cta{
+  margin-top:10px;align-self:flex-start;background:var(--ink);color:var(--bg);border:none;
+  padding:9px 18px;border-radius:999px;font-weight:700;font-size:13px;transition:.15s;
+}
+.mode-card.selected .mode-cta{background:var(--accent);color:var(--accent-ink);}
+.mode-cta:hover{opacity:.85;transform:translateY(-1px);}
+
+/* ---------- catalog ---------- */
+.cat-filter{margin-bottom:18px;}
+.tour-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:18px;}
+.tour-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:var(--shadow-sm);position:relative;transition:.2s;
+}
+.tour-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.tour-media{
+  height:132px;display:flex;align-items:center;justify-content:center;font-size:46px;position:relative;
+  background:linear-gradient(135deg,var(--accent-soft),var(--surface-2));
+}
+.tour-badge{
+  position:absolute;top:10px;left:10px;background:var(--ink);color:var(--bg);font-size:11px;font-weight:800;
+  padding:4px 9px;border-radius:999px;
+}
+.tour-day-badge{
+  position:absolute;top:10px;right:10px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:800;
+  padding:4px 9px;border-radius:999px;
+}
+.tour-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.tour-name{font-size:15.5px;font-weight:800;line-height:1.35;}
+.tour-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tour-tag{font-size:11px;color:var(--ink-soft);background:var(--surface-2);padding:3px 8px;border-radius:999px;}
+.tour-desc{font-size:12.5px;color:var(--ink-soft);flex:1;}
+.tour-meta{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--ink-faint);margin-top:2px;}
+.tour-price{font-size:14.5px;font-weight:800;color:var(--ink);}
+.tour-price small{font-weight:500;color:var(--ink-faint);font-size:11px;}
+.tour-add{
+  border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:999px;
+  padding:9px 0;font-weight:800;font-size:13.5px;width:100%;margin-top:4px;transition:.15s;
+}
+.tour-add.added{background:var(--teal);border-color:var(--teal);color:#fff;}
+.tour-add:hover{background:var(--ink);color:var(--bg);}
+.tour-add.added:hover{background:var(--danger);border-color:var(--danger);}
+.empty-note{color:var(--ink-faint);font-size:13.5px;padding:20px 0;}
+.tour-media-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+/* ---------- calendar ---------- */
+.cal-wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+.calendar{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;width:320px;
+  box-shadow:var(--shadow-sm);
+}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cal-head .ttl{font-weight:800;font-size:15px;font-family:var(--font-display);}
+.cal-nav{display:flex;gap:6px;}
+.cal-nav button{
+  width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:14px;
+}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;}
+.cal-dow{font-size:11px;color:var(--ink-faint);font-weight:700;padding:4px 0;}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;
+  border:none;background:transparent;color:var(--ink);
+}
+.cal-day.disabled{color:var(--ink-faint);opacity:.35;cursor:not-allowed;}
+.cal-day.pad{visibility:hidden;}
+.cal-day:not(.disabled):not(.pad):hover{background:var(--surface-2);}
+.cal-day.selected{background:var(--accent);color:var(--accent-ink);font-weight:800;}
+.date-readout{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:20px;flex:1;min-width:220px;
+  box-shadow:var(--shadow-sm);
+}
+.date-readout .label{font-size:12.5px;color:var(--ink-soft);font-weight:700;margin-bottom:6px;}
+.date-readout .val{font-size:22px;font-weight:900;font-family:var(--font-display);}
+.date-readout .val.empty{color:var(--ink-faint);font-weight:600;font-size:15px;font-family:inherit;}
+.quick-dates{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+
+/* ---------- travelers ---------- */
+.traveler-grid{display:flex;gap:16px;flex-wrap:wrap;}
+.traveler-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex:1;min-width:220px;
+  box-shadow:var(--shadow-sm);
+}
+.traveler-label{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;}
+
+/* ---------- itinerary sidebar ---------- */
+.layout{display:grid;grid-template-columns:1fr 340px;gap:0;align-items:flex-start;}
+.main-col{min-width:0;}
+.side-col{position:sticky;top:74px;padding:40px 0 40px 24px;}
+.itin-panel{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md);display:flex;flex-direction:column;max-height:calc(100vh - 110px);
+  position:relative;
+}
+.itin-panel::before{
+  content:'';position:absolute;top:-9px;left:22px;width:46px;height:16px;
+  background:var(--accent-soft);border-radius:3px;transform:rotate(-3deg);
+  box-shadow:var(--shadow-sm);z-index:2;
+}
+.itin-mobile-close{
+  display:none;position:absolute;top:14px;right:14px;background:var(--surface-2);border:none;
+  border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:700;color:var(--ink-soft);
+}
+.itin-head{padding:22px 20px 12px;border-bottom:1px dashed var(--line-strong);}
+.itin-head-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.itin-head h3{margin:0 0 4px;font-size:16px;font-weight:900;font-family:var(--font-display);}
+.itin-clear{background:none;border:none;color:var(--ink-faint);font-size:11.5px;text-decoration:underline;padding:0;display:none;}
+.itin-clear:hover{color:var(--danger);}
+.itin-progress{height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden;margin-top:10px;}
+.itin-progress-bar{height:100%;background:var(--teal);border-radius:999px;transition:.25s;}
+.itin-progress-bar.over{background:var(--danger);}
+.itin-progress-text{font-size:11.5px;color:var(--ink-faint);margin-top:6px;}
+.itin-body{padding:10px 14px;overflow-y:auto;flex:1;}
+.itin-day-label{font-size:11.5px;font-weight:800;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;padding:10px 6px 4px;}
+.itin-item{
+  display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-radius:10px;
+  border-bottom:1px dashed var(--line);
+}
+.itin-item:last-child{border-bottom:none;}
+.itin-item:hover{background:var(--surface-2);}
+.itin-time{font-size:11.5px;color:var(--ink-faint);font-weight:700;width:40px;flex-shrink:0;padding-top:2px;}
+.itin-emoji{font-size:18px;flex-shrink:0;}
+.itin-info{flex:1;min-width:0;}
+.itin-info .nm{font-size:13px;font-weight:700;line-height:1.3;}
+.itin-info .mt{font-size:11px;color:var(--ink-faint);}
+.itin-actions{display:flex;gap:2px;flex-shrink:0;}
+.itin-actions button{
+  width:22px;height:22px;border:none;background:transparent;color:var(--ink-faint);font-size:13px;border-radius:6px;
+}
+.itin-actions button:hover{background:var(--surface-2);color:var(--ink);}
+.itin-empty{padding:30px 16px;text-align:center;color:var(--ink-faint);font-size:13px;}
+.itin-foot{padding:14px 20px 18px;border-top:1px dashed var(--line-strong);}
+.itin-next-step{
+  display:none;font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-soft);
+  padding:9px 12px;border-radius:10px;margin-bottom:12px;line-height:1.5;
+}
+.itin-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;}
+.itin-total-row .lbl{font-size:12.5px;color:var(--ink-soft);}
+.itin-total-row .amt{font-size:22px;font-weight:900;font-family:var(--font-display);}
+.itin-submit{
+  width:100%;background:var(--accent);color:var(--accent-ink);border:none;border-radius:999px;
+  padding:13px;font-weight:800;font-size:14.5px;transition:.15s;
+}
+.itin-submit:hover:not(:disabled){transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.itin-submit:disabled{background:var(--surface-2);color:var(--ink-faint);}
+
+.mobile-cart-bar{display:none;}
+
+/* ---------- notes / service section ---------- */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px 20px;}
+.info-card .ic{font-size:22px;margin-bottom:10px;}
+.info-card h4{margin:0 0 6px;font-size:14.5px;font-weight:800;}
+.info-card p{margin:0;font-size:13px;color:var(--ink-soft);}
+
+/* ---------- about ---------- */
+.about-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start;}
+.about-copy h2{font-size:24px;font-weight:900;margin:0 0 12px;font-family:var(--font-display);}
+.about-copy p{color:var(--ink-soft);font-size:14.5px;margin:0 0 12px;}
+.about-stats{display:flex;gap:22px;margin-top:18px;flex-wrap:wrap;}
+.about-stats div{display:flex;flex-direction:column;}
+.about-stats b{font-size:22px;font-weight:900;font-family:var(--font-display);color:var(--accent);}
+.about-stats span{font-size:11.5px;color:var(--ink-faint);}
+.testimonials{display:flex;flex-direction:column;gap:12px;}
+.testi{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px 18px 16px 44px;
+  box-shadow:var(--shadow-sm);position:relative;
+}
+.testi::before{
+  content:'"';font-family:var(--font-display);font-size:42px;font-weight:900;color:var(--accent-soft);
+  position:absolute;top:2px;left:14px;line-height:1;
+}
+.testi p{margin:0 0 10px;font-size:13.5px;color:var(--ink);font-style:italic;position:relative;z-index:1;}
+.testi .who{font-size:12px;color:var(--ink-faint);font-weight:700;}
+.testi-note{font-size:11px;color:var(--ink-faint);margin-top:2px;}
+
+/* ---------- footer ---------- */
+footer{border-top:1px dashed var(--line-strong);padding:28px 0;margin-top:20px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--ink-faint);}
+.admin-link{background:none;border:none;color:var(--ink-faint);font-size:12.5px;text-decoration:underline;}
+
+/* ---------- modals ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(20,17,14,.55);display:none;align-items:center;justify-content:center;
+  z-index:100;padding:20px;backdrop-filter:blur(2px);
+}
+.overlay.open{display:flex;}
+.modal{
+  background:var(--surface);border-radius:var(--radius-lg);max-width:480px;width:100%;max-height:88vh;overflow-y:auto;
+  box-shadow:var(--shadow-md);
+}
+.modal.wide{max-width:820px;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:2;}
+.modal-head h3{margin:0;font-size:16px;font-weight:900;font-family:var(--font-display);}
+.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:15px;transition:.15s;}
+.modal-close:hover{border-color:var(--accent);color:var(--accent);}
+.modal-body{padding:22px;}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.field label{font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+.field input,.field select,.field textarea{
+  border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;background:var(--surface);color:var(--ink);
+  transition:.15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
+.field textarea{resize:vertical;min-height:64px;}
+.field-row{display:flex;gap:12px;}
+.field-row .field{flex:1;}
+.btn{
+  border:none;border-radius:999px;padding:11px 20px;font-weight:800;font-size:13.5px;transition:.15s;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:var(--shadow-sm);}
+.btn-primary:hover{box-shadow:var(--shadow-md);}
+.btn-ghost{background:var(--surface-2);color:var(--ink);}
+.btn-row{display:flex;gap:10px;margin-top:6px;}
+.success-box{text-align:center;padding:20px 6px;}
+.success-box .ic{font-size:40px;margin-bottom:10px;}
+.success-box h4{margin:0 0 8px;font-size:17px;font-weight:900;font-family:var(--font-display);}
+.success-box p{color:var(--ink-soft);font-size:13.5px;}
+
+/* ---------- admin ---------- */
+.admin-login{display:flex;flex-direction:column;gap:12px;}
+.admin-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);padding:0 22px;}
+.admin-tab{
+  background:none;border:none;padding:12px 6px;font-weight:700;font-size:13.5px;color:var(--ink-faint);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.admin-tab.active{color:var(--ink);border-color:var(--accent);}
+.admin-toolbar{display:flex;justify-content:space-between;align-items:center;padding:16px 22px 0;gap:10px;flex-wrap:wrap;}
+.admin-table{width:100%;border-collapse:collapse;font-size:13px;}
+.admin-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-faint);padding:10px 8px;border-bottom:1px solid var(--line);}
+.admin-table td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle;}
+.admin-table tr:last-child td{border-bottom:none;}
+.pill-toggle{
+  border:none;border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:800;
+}
+.pill-toggle.on{background:var(--teal-soft);color:var(--teal);}
+.pill-toggle.off{background:var(--surface-2);color:var(--ink-faint);}
+.mini-btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;color:var(--ink);}
+.mini-btn:hover{border-color:var(--accent);color:var(--accent);}
+.mini-btn.danger:hover{border-color:var(--danger);color:var(--danger);}
+.status-select{border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-size:12px;background:var(--surface);color:var(--ink);}
+.admin-empty{padding:40px 22px;text-align:center;color:var(--ink-faint);font-size:13.5px;}
+.admin-thumb{width:28px;height:28px;border-radius:6px;object-fit:cover;vertical-align:middle;margin-right:6px;}
+.photo-upload{display:flex;gap:14px;align-items:center;}
+.photo-preview{
+  width:110px;height:82px;border-radius:10px;background:var(--surface-2);border:1.5px dashed var(--line);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:11.5px;color:var(--ink-faint);
+  text-align:center;
+}
+.photo-preview img{width:100%;height:100%;object-fit:cover;}
+.photo-upload-actions{display:flex;flex-direction:column;gap:8px;}
+.photo-upload-btn{display:inline-block;text-align:center;cursor:pointer;}
+.worksheet{padding:22px;font-size:13.5px;}
+.worksheet h4{margin:0 0 4px;font-size:18px;}
+.ws-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);}
+.ws-row span:first-child{color:var(--ink-soft);}
+.ws-items{margin:14px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.ws-item{display:flex;justify-content:space-between;padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--line);}
+.ws-item:last-child{border-bottom:none;}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);
+  padding:12px 20px;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:var(--shadow-md);
+  opacity:0;pointer-events:none;transition:.25s;z-index:200;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;}
+  .side-col{position:static;padding:0;display:none;}
+  .side-col.mobile-open{display:block;padding:16px 0 0;}
+  .mobile-cart-bar{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--surface);
+    border-top:1px solid var(--line);padding:12px 18px;align-items:center;justify-content:space-between;
+    box-shadow:0 -6px 20px rgba(0,0,0,.08);
+  }
+  body{padding-bottom:74px;}
+  .mode-grid{grid-template-columns:1fr;}
+  .about-wrap{grid-template-columns:1fr;}
+  .cal-wrap{flex-direction:column;}
+  .itin-mobile-close{display:block;}
+  .itin-head{padding-top:46px;}
+  .hero-ornament{display:none;}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px;}
+  .progress-steps{display:none;}
+}
+@media print{
+  body *{visibility:hidden;}
+  #printArea,#printArea *{visibility:visible;}
+  #printArea{position:absolute;top:0;left:0;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-mark">J</span> J人秘書 <span class="brand-sub">｜都蘭行程規劃</span></div>
+    <div class="progress-steps" id="progressSteps"></div>
+    <button class="cart-btn" id="mobileCartToggleTop" onclick="toggleMobileCart()">
+      我的行程 <span class="badge" id="topBadge">0</span>
+    </button>
+  </div>
+</div>
+
+<div class="wrap hero">
+  <svg class="hero-ornament" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="168" cy="38" r="16" style="stroke:var(--accent)" stroke-width="2"/>
+    <g style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round">
+      <line x1="168" y1="10" x2="168" y2="4"/>
+      <line x1="168" y1="66" x2="168" y2="72"/>
+      <line x1="140" y1="38" x2="134" y2="38"/>
+      <line x1="196" y1="38" x2="202" y2="38"/>
+      <line x1="148" y1="18" x2="144" y2="14"/>
+      <line x1="188" y1="18" x2="192" y2="14"/>
+      <line x1="148" y1="58" x2="144" y2="62"/>
+      <line x1="188" y1="58" x2="192" y2="62"/>
+    </g>
+    <path d="M20 120 L60 70 L85 95 L120 55 L160 100" style="stroke:var(--ink-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M0 140 C20 130,40 150,60 140 C80 130,100 150,120 140 C140 130,160 150,180 140 C195 134,210 138,220 136" style="stroke:var(--teal)" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+  <div class="eyebrow">🌊 都蘭國 · 快速排程小工具</div>
+  <h1 class="hero-title">幾個點選，<em>幫你排好都蘭行程</em></h1>
+  <p class="hero-desc">不用打字、不用想破頭。告訴我們你有多少時間，剩下的交給我們自動安排，或自己動手挑喜歡的遊程。</p>
+</div>
+
+<div class="layout wrap">
+  <div class="main-col">
+
+    <!-- STEP 1: 時間需求 -->
+    <section class="section" id="step1">
+      <div class="section-head">
+        <div class="section-title"><span class="step-no">1</span>您有多少時間可以安排？</div>
+        <div class="section-sub">選一個最接近的方案</div>
+      </div>
+      <div class="chiprow" id="presetChips"></div>
+      <div class="budget-readout" id="budgetReadout"></div>
+    </section>
+
+    <!-- STEP 2: 自動/手動 -->
+    <section class="section" id="step2">
+      <div class="section-head">
+        <div class="section-title"><span class="step-no">2</span>自動安排，還是自己挑？</div>
+      </div>
+      <div class="mode-grid" id="modeGrid"></div>
+    </section>
+
+    <!-- STEP 3: 日曆 -->
+    <section class="section" id="stepDate">
+      <div class="section-head">
+        <div class="section-title"><span class="step-no">3</span>預計什麼時候來？</div>
+      </div>
+      <div class="cal-wrap">
+        <div class="calendar" id="calendar"></div>
+        <div class="date-readout">
+          <div class="label">已選日期</div>
+          <div class="val empty" id="dateVal">尚未選擇，點日曆選一天吧</div>
+          <div class="quick-dates" id="quickDates"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: 人數 -->
+    <section class="section" id="stepTravelers">
+      <div class="section-head">
+        <div class="section-title"><span class="step-no">4</span>旅客人數</div>
+      </div>
+      <div class="traveler-grid">
+        <div class="traveler-card">
+          <div class="traveler-label">🧑 大人</div>
+          <div class="stepper">
+            <button onclick="adjustTraveler('adults',-1)">−</button>
+            <div class="val" id="adultsVal">2</div>
+            <button onclick="adjustTraveler('adults',1)">＋</button>
+          </div>
+        </div>
+        <div class="traveler-card">
+          <div class="traveler-label">🧒 小孩</div>
+          <div class="stepper">
+            <button onclick="adjustTraveler('children',-1)">−</button>
+            <div class="val" id="childrenVal">0</div>
+            <button onclick="adjustTraveler('children',1)">＋</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5: 遊程 -->
+    <section class="section" id="stepCatalog">
+      <div class="section-head">
+        <div class="section-title"><span class="step-no">5</span>都蘭遊程選單</div>
+        <div class="section-sub" id="catalogHint">點選卡片加入行程</div>
+      </div>
+      <div class="cat-filter chiprow" id="catFilter"></div>
+      <div class="tour-grid" id="tourGrid"></div>
+    </section>
+
+    <!-- 關於都蘭國 + 回饋 -->
+    <section class="section" id="aboutSection">
+      <div class="about-wrap">
+        <div class="about-copy">
+          <h2>關於都蘭國</h2>
+          <p>都蘭國由一群在地創作者與嚮導組成，把海洋、部落文化與手作生活揉進每一趟行程。我們相信旅行不用趕，慢下來才看得見都蘭真正的樣子。</p>
+          <p>J人秘書是我們為旅人打造的排程小工具——把複雜的行程規劃簡化成幾次點選，讓你把時間留給風景，而不是猶豫。</p>
+          <div class="about-stats">
+            <div><b>10+</b><span>特色遊程</span></div>
+            <div><b>1000+</b><span>服務旅人</span></div>
+            <div><b>4.8★</b><span>平均評價</span></div>
+          </div>
+        </div>
+        <div class="testimonials">
+          <div class="testi"><p>“行程排得剛剛好，完全不用自己傷腦筋，嚮導也很在地很懂都蘭。”</p><div class="who">來自台北的旅人</div></div>
+          <div class="testi"><p>“帶小孩出門原本很怕行程太滿，這次抓的節奏很舒服。”</p><div class="who">帶兩個孩子的媽媽</div></div>
+          <div class="testi"><p>“SUP 加部落導覽的組合超推薦，海邊日落真的美到犯規。”</p><div class="who">自由行情侶</div></div>
+          <div class="testi-note">＊以上為範例回饋文字，正式上線前請替換為真實旅客評價。</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 行程側欄 -->
+  <div class="side-col" id="sideCol">
+    <div class="itin-panel">
+      <button class="itin-mobile-close" onclick="toggleMobileCart()">✕ 收起</button>
+      <div class="itin-head">
+        <div class="itin-head-row">
+          <h3>我的行程</h3>
+          <button class="itin-clear" id="itinClearBtn" onclick="clearItinerary()">清空行程</button>
+        </div>
+        <div class="itin-progress-text" id="itinProgressText">尚未設定時間</div>
+        <div class="itin-progress"><div class="itin-progress-bar" id="itinProgressBar" style="width:0%"></div></div>
+      </div>
+      <div class="itin-body" id="itinBody"></div>
+      <div class="itin-foot">
+        <div class="itin-next-step" id="itinNextStep"></div>
+        <div class="itin-total-row">
+          <span class="lbl">預估總報價</span>
+          <span class="amt" id="itinTotal">NT$ 0</span>
+        </div>
+        <button class="itin-submit" id="itinSubmitBtn" onclick="openSubmitModal()" disabled>填寫資料送出需求</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-cart-bar">
+  <div>
+    <div style="font-size:11.5px;color:var(--ink-faint);">預估總報價</div>
+    <div style="font-weight:900;font-size:16px;" id="mobileTotal">NT$ 0</div>
+  </div>
+  <button class="btn btn-primary" onclick="toggleMobileCart()">查看行程 (<span id="mobileBadge">0</span>)</button>
+</div>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 都蘭國 · J人秘書 — 本工具僅提供預估行程與報價，正式行程以專人確認為準。</span>
+    <button class="admin-link" onclick="openAdminLogin()">管理後台</button>
+  </div>
+</footer>
+
+<!-- 送出需求 modal -->
+<div class="overlay" id="submitOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3>填寫聯絡資訊</h3><button class="modal-close" onclick="closeModal('submitOverlay')">✕</button></div>
+    <div class="modal-body" id="submitModalBody"></div>
+  </div>
+</div>
+
+<!-- 管理員登入 -->
+<div class="overlay" id="adminLoginOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3>管理後台登入</h3><button class="modal-close" onclick="closeModal('adminLoginOverlay')">✕</button></div>
+    <div class="modal-body">
+      <div class="admin-login">
+        <div class="field">
+          <label>密碼</label>
+          <input type="password" id="adminPassInput" autocomplete="new-password" placeholder="請輸入後台密碼">
+        </div>
+        <div id="adminLoginError" style="color:var(--danger);font-size:12.5px;display:none;">密碼錯誤，請再試一次</div>
+        <button class="btn btn-primary" onclick="tryAdminLogin()">登入</button>
+        <div style="font-size:11.5px;color:var(--ink-faint);">預設密碼：amis2020（僅供本機示範，正式上線請串接真正的後端驗證）</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 管理後台主體 -->
+<div class="overlay" id="adminOverlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <h3>🗂️ 管理後台</h3>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button class="admin-link" onclick="adminLogout()">登出</button>
+        <button class="modal-close" onclick="closeModal('adminOverlay')">✕</button>
+      </div>
+    </div>
+    <div class="admin-tabs" id="adminTabs"></div>
+    <div id="adminTabBody"></div>
+  </div>
+</div>
+
+<!-- 商品編輯 modal -->
+<div class="overlay" id="productModalOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3 id="productModalTitle">新增遊程</h3><button class="modal-close" onclick="closeModal('productModalOverlay')">✕</button></div>
+    <div class="modal-body" id="productModalBody"></div>
+  </div>
+</div>
+
+<!-- 工作單檢視 modal -->
+<div class="overlay" id="worksheetOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>客戶工作單</h3>
+      <div style="display:flex;gap:8px;">
+        <button class="mini-btn" onclick="window.print()">🖨️ 列印</button>
+        <button class="modal-close" onclick="closeModal('worksheetOverlay')">✕</button>
+      </div>
+    </div>
+    <div id="printArea"><div class="worksheet" id="worksheetBody"></div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- data ---------------- */
+const DEFAULT_PRODUCTS = [
+  {id:'t1',name:'都蘭糖廠藝術巡禮',category:'文化藝術',duration:120,priceAdult:350,priceChild:200,icon:'🎨',tags:['室內','親子友善'],desc:'走進老糖廠改建的藝術聚落，聽在地故事、看裝置藝術。',active:true},
+  {id:'t2',name:'都蘭鼻 SUP 立式划槳',category:'水域活動',duration:150,priceAdult:1500,priceChild:1200,icon:'🏄',tags:['戶外','需下水'],desc:'新手教練帶領，划向湛藍太平洋，體驗都蘭獨有的海景。',active:true},
+  {id:'t3',name:'衝浪初體驗課程',category:'水域活動',duration:180,priceAdult:1800,priceChild:1500,icon:'🌊',tags:['戶外','需下水'],desc:'從陸上暖身到下水站板，教練一對一帶你抓住第一道浪。',active:true},
+  {id:'t4',name:'阿美族部落文化導覽',category:'文化體驗',duration:90,priceAdult:400,priceChild:250,icon:'🪘',tags:['步行','親子友善'],desc:'部落耆老帶路，認識傳統祭儀、歌謠與生活智慧。',active:true},
+  {id:'t5',name:'都蘭山秘境健行',category:'秘境探索',duration:240,priceAdult:800,priceChild:500,icon:'⛰️',tags:['戶外','中強度'],desc:'穿越林徑登高望海，俯瞰整個都蘭灣的遼闊景色。',active:true},
+  {id:'t6',name:'月光小棧手作編織',category:'手作課程',duration:90,priceAdult:600,priceChild:450,icon:'🧶',tags:['室內','親子友善'],desc:'在月光小棧體驗傳統編織技法，帶走自己完成的作品。',active:true},
+  {id:'t7',name:'海邊日出瑜珈',category:'身心放鬆',duration:60,priceAdult:500,priceChild:350,icon:'🧘',tags:['戶外','清晨'],desc:'伴著日出海浪聲練習呼吸與伸展，喚醒旅程的一天。',active:true},
+  {id:'t8',name:'在地部落風味餐',category:'風味美食',duration:90,priceAdult:450,priceChild:300,icon:'🍲',tags:['室內','可素食'],desc:'嚴選在地食材，一桌吃遍山海與部落風味。',active:true},
+  {id:'t9',name:'都蘭灣獨木舟探索',category:'水域活動',duration:150,priceAdult:1400,priceChild:1100,icon:'🛶',tags:['戶外','需下水'],desc:'滑行於平靜海灣，貼近海岸線欣賞礁岩與海蝕地形。',active:true},
+  {id:'t10',name:'東海岸日落野餐',category:'身心放鬆',duration:90,priceAdult:550,priceChild:400,icon:'🌅',tags:['戶外','傍晚'],desc:'備好野餐墊與輕食，在海堤看太平洋日落染紅天空。',active:true},
+];
+
+const PRESETS = [
+  {key:'2h', label:'2小時', sub:'順路走走', days:[120]},
+  {key:'half', label:'半天', sub:'約 4 小時', days:[240]},
+  {key:'full', label:'一日遊', sub:'約 8 小時', days:[480]},
+  {key:'2d1n', label:'兩天一夜', sub:'約 12 小時', days:[480,240]},
+  {key:'3d2n', label:'三天兩夜', sub:'約 20 小時', days:[480,480,240]},
+];
+
+const WEEKDAYS = ['日','一','二','三','四','五','六'];
+const MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+function toISODate(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function parseISODate(iso){
+  const [y,m,d] = iso.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+
+/* ---------------- state ---------------- */
+const state = {
+  preset:'full',
+  mode:null,
+  activeCategory:'全部',
+  selected:[],          // ordered array of product ids
+  visitDate:null,        // 'YYYY-MM-DD'
+  calMonth:(()=>{const d=new Date();d.setDate(1);return d;})(),
+  adults:2,
+  children:0,
+  mobileCartOpen:false,
+  admin:{loggedIn:false, tab:'products', editingProduct:null, pendingImage:null},
+};
+
+/* ---------------- storage ---------------- */
+function loadProducts(){
+  try{
+    const raw = localStorage.getItem('js_products_v1');
+    if(raw) return JSON.parse(raw);
+    localStorage.setItem('js_products_v1', JSON.stringify(DEFAULT_PRODUCTS));
+  }catch(e){}
+  return DEFAULT_PRODUCTS.slice();
+}
+function saveProducts(list){
+  try{ localStorage.setItem('js_products_v1', JSON.stringify(list)); }
+  catch(e){ toast('儲存失敗，可能是照片檔案太大導致空間不足'); }
+}
+function loadOrders(){
+  try{ return JSON.parse(localStorage.getItem('js_orders_v1')||'[]'); }catch(e){ return []; }
+}
+function saveOrders(list){
+  try{ localStorage.setItem('js_orders_v1', JSON.stringify(list)); }
+  catch(e){ toast('儲存失敗，瀏覽器儲存空間可能無法使用'); }
+}
+function getAdminPass(){
+  try{ return localStorage.getItem('js_admin_pass_v1') || 'amis2020'; }
+  catch(e){ return 'amis2020'; }
+}
+function getBackupUrl(){
+  try{ return localStorage.getItem('js_backup_url_v1') || ''; }catch(e){ return ''; }
+}
+function setBackupUrl(url){
+  try{ localStorage.setItem('js_backup_url_v1', url); }catch(e){}
+}
+function getLastBackupTime(){
+  try{ return localStorage.getItem('js_backup_time_v1') || ''; }catch(e){ return ''; }
+}
+function setLastBackupTime(iso){
+  try{ localStorage.setItem('js_backup_time_v1', iso); }catch(e){}
+}
+
+let PRODUCTS = loadProducts();
+
+/* ---------------- helpers ---------------- */
+function fmtMoney(n){ return 'NT$ ' + Math.round(n).toLocaleString('zh-Hant-TW'); }
+function fmtHours(min){
+  const h = Math.floor(min/60), m = min%60;
+  if(h && m) return `${h}小時${m}分`;
+  if(h) return `${h}小時`;
+  return `${m}分`;
+}
+function activeProducts(){ return PRODUCTS.filter(p=>p.active); }
+function productById(id){ return PRODUCTS.find(p=>p.id===id); }
+function currentDailyBudgets(){
+  return PRESETS.find(p=>p.key===state.preset).days;
+}
+function totalBudgetMinutes(){ return currentDailyBudgets().reduce((a,b)=>a+b,0); }
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+/* ---------------- render: progress steps ---------------- */
+const PROGRESS_SECTIONS = ['step1','step2','stepDate','stepTravelers','stepCatalog'];
+function renderProgress(){
+  const done = [
+    true,
+    !!state.mode,
+    !!state.visitDate,
+    true,
+    state.selected.length>0,
+  ];
+  const el = document.getElementById('progressSteps');
+  el.innerHTML = done.map((d,i)=>
+    `<button class="pstep ${d?'done':''}" onclick="scrollToStep('${PROGRESS_SECTIONS[i]}')" aria-label="前往步驟${i+1}"></button>`
+  ).join('');
+}
+function scrollToStep(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ---------------- render: step 1 time ---------------- */
+function renderPresets(){
+  const el = document.getElementById('presetChips');
+  el.innerHTML = PRESETS.map(p=>`
+    <button class="chip ${state.preset===p.key?'selected':''}" onclick="selectPreset('${p.key}')">
+      ${p.label}<small>${p.sub}</small>
+    </button>`).join('');
+  renderBudgetReadout();
+}
+function selectPreset(key){
+  state.preset = key;
+  renderPresets();
+  if(state.mode==='auto' && state.selected.length>0){
+    runAutoGenerate();
+  }else{
+    renderAll(['mode','catalog','itinerary']);
+  }
+}
+function renderBudgetReadout(){
+  const mins = totalBudgetMinutes();
+  const days = currentDailyBudgets().length;
+  document.getElementById('budgetReadout').innerHTML =
+    `🕐 目前規劃 <b>${days} 天</b>，總活動時間約 <b>${fmtHours(mins)}</b>`;
+}
+
+/* ---------------- render: step 2 mode ---------------- */
+function renderModeGrid(){
+  const el = document.getElementById('modeGrid');
+  el.innerHTML = `
+    <div class="mode-card ${state.mode==='auto'?'selected':''}" onclick="selectMode('auto')">
+      ${state.mode==='auto' ? '<div class="mode-check">✓</div>' : ''}
+      <div class="mode-icon-wrap">🤖</div>
+      <div class="mode-name">自動幫我排</div>
+      <div class="mode-desc">依照你的時間，自動組合合適的遊程，之後仍可自由調整。</div>
+      <button class="mode-cta" onclick="event.stopPropagation();selectMode('auto');runAutoGenerate();">⚡ 立即自動安排</button>
+    </div>
+    <div class="mode-card ${state.mode==='manual'?'selected':''}" onclick="selectMode('manual')">
+      ${state.mode==='manual' ? '<div class="mode-check">✓</div>' : ''}
+      <div class="mode-icon-wrap">🖐️</div>
+      <div class="mode-name">我要自己選</div>
+      <div class="mode-desc">瀏覽下方遊程，點選喜歡的項目加入你的行程。</div>
+      <button class="mode-cta" onclick="event.stopPropagation();selectMode('manual');">👉 開始挑選</button>
+    </div>`;
+  document.getElementById('catalogHint').textContent =
+    state.mode==='auto' ? '已自動安排，仍可點選調整' : '點選卡片加入行程';
+}
+function selectMode(m){
+  state.mode = m;
+  renderAll(['progress','mode','catalog']);
+  document.getElementById('stepCatalog').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ---------------- auto generate ---------------- */
+function runAutoGenerate(){
+  const budgets = currentDailyBudgets();
+  const pool = activeProducts().slice().sort((a,b)=> b.duration - a.duration);
+  const used = new Set();
+  const dayBuckets = budgets.map(b=>({remaining:b, items:[]}));
+
+  dayBuckets.forEach(day=>{
+    let categoriesUsed = new Set();
+    let progress = true;
+    while(progress){
+      progress = false;
+      for(const t of pool){
+        if(used.has(t.id)) continue;
+        if(t.duration <= day.remaining && !categoriesUsed.has(t.category)){
+          day.items.push(t.id); used.add(t.id); day.remaining -= t.duration; categoriesUsed.add(t.category);
+          progress = true;
+        }
+      }
+    }
+    for(const t of pool){
+      if(used.has(t.id)) continue;
+      if(t.duration <= day.remaining){
+        day.items.push(t.id); used.add(t.id); day.remaining -= t.duration;
+      }
+    }
+  });
+
+  state.selected = dayBuckets.flatMap(d=>d.items);
+  renderAll(['catalog','itinerary','progress']);
+  toast('已自動安排好行程，歡迎再自由調整 ✨');
+}
+
+/* ---------------- render: step 3 catalog ---------------- */
+function renderCatFilter(){
+  const cats = ['全部', ...new Set(activeProducts().map(p=>p.category))];
+  const el = document.getElementById('catFilter');
+  el.innerHTML = cats.map(c=>`
+    <button class="chip tiny ${state.activeCategory===c?'selected':''}" onclick="setCategory('${c}')">${c}</button>
+  `).join('');
+}
+function setCategory(c){ state.activeCategory = c; renderCatFilter(); renderTourGrid(); }
+
+function renderTourGrid(){
+  const el = document.getElementById('tourGrid');
+  const schedule = computeSchedule();
+  const dayOfItem = {};
+  schedule.forEach((day,idx)=> day.items.forEach(it=> dayOfItem[it.id]=idx+1));
+
+  let list = activeProducts();
+  if(state.activeCategory!=='全部') list = list.filter(p=>p.category===state.activeCategory);
+
+  if(list.length===0){
+    el.innerHTML = `<div class="empty-note">此分類目前沒有上架中的遊程。</div>`;
+    return;
+  }
+
+  el.innerHTML = list.map(p=>{
+    const isSel = state.selected.includes(p.id);
+    const dayBadge = isSel && dayOfItem[p.id] ? `<div class="tour-day-badge">第 ${dayOfItem[p.id]} 天</div>` : '';
+    const media = p.image ? `<img class="tour-media-img" src="${p.image}" alt="${p.name}">` : p.icon;
+    return `
+    <div class="tour-card">
+      <div class="tour-media">${media}<div class="tour-badge">${fmtHours(p.duration)}</div>${dayBadge}</div>
+      <div class="tour-body">
+        <div class="tour-name">${p.name}</div>
+        <div class="tour-tags">${p.tags.map(t=>`<span class="tour-tag">${t}</span>`).join('')}<span class="tour-tag">${p.category}</span></div>
+        <div class="tour-desc">${p.desc}</div>
+        <div class="tour-meta">
+          <div class="tour-price">${fmtMoney(p.priceAdult)}<small> /大人</small></div>
+          <div class="tour-price">${fmtMoney(p.priceChild)}<small> /小孩</small></div>
+        </div>
+        <button class="tour-add ${isSel?'added':''}" onclick="toggleTour('${p.id}')">${isSel?'✓ 已加入・點擊移除':'＋ 加入行程'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleTour(id){
+  const i = state.selected.indexOf(id);
+  if(i>=0) state.selected.splice(i,1);
+  else state.selected.push(id);
+  renderAll(['catalog','itinerary','progress']);
+}
+
+/* ---------------- schedule computation ---------------- */
+function computeSchedule(){
+  const budgets = currentDailyBudgets();
+  const days = budgets.map(b=>({budget:b, remaining:b, items:[]}));
+  let dayIdx = 0;
+  for(const id of state.selected){
+    const p = productById(id);
+    if(!p) continue;
+    while(dayIdx < days.length-1 && p.duration > days[dayIdx].remaining && days[dayIdx].items.length>0){
+      dayIdx++;
+    }
+    const day = days[Math.min(dayIdx, days.length-1)];
+    day.items.push(p);
+    day.remaining -= p.duration;
+  }
+  let clock = 9*60;
+  days.forEach(day=>{
+    let t = 9*60;
+    day.items.forEach(it=>{
+      it._start = t;
+      t += it.duration + 15;
+    });
+  });
+  return days;
+}
+function minutesToClock(m){
+  const h = Math.floor(m/60), mm = m%60;
+  return `${String(h).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+}
+
+/* ---------------- render: step 4 calendar ---------------- */
+function renderCalendar(){
+  const el = document.getElementById('calendar');
+  const month = state.calMonth;
+  const y = month.getFullYear(), m = month.getMonth();
+  const first = new Date(y,m,1);
+  const startPad = first.getDay();
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  let cells = '';
+  for(let i=0;i<startPad;i++) cells += `<div class="cal-day pad"></div>`;
+  for(let d=1; d<=daysInMonth; d++){
+    const dateObj = new Date(y,m,d);
+    const iso = toISODate(dateObj);
+    const disabled = dateObj < today;
+    const selected = state.visitDate === iso;
+    cells += `<button class="cal-day ${disabled?'disabled':''} ${selected?'selected':''}"
+      ${disabled?'disabled':`onclick="selectDate('${iso}')"`}>${d}</button>`;
+  }
+
+  el.innerHTML = `
+    <div class="cal-head">
+      <div class="ttl">${y} 年 ${MONTHS[m]}</div>
+      <div class="cal-nav">
+        <button onclick="shiftMonth(-1)">‹</button>
+        <button onclick="shiftMonth(1)">›</button>
+      </div>
+    </div>
+    <div class="cal-grid">
+      ${WEEKDAYS.map(w=>`<div class="cal-dow">${w}</div>`).join('')}
+      ${cells}
+    </div>`;
+
+  const qd = document.getElementById('quickDates');
+  const opts = [
+    {label:'這個週末', offset: (6 - today.getDay() + 7) % 7 || 6},
+    {label:'下週一', offset: (8 - today.getDay())},
+    {label:'兩週後', offset: 14},
+  ];
+  qd.innerHTML = opts.map(o=>{
+    const d = new Date(today); d.setDate(d.getDate()+o.offset);
+    const iso = toISODate(d);
+    return `<button class="chip tiny" onclick="quickSelectDate('${iso}')">${o.label}</button>`;
+  }).join('');
+}
+function shiftMonth(delta){
+  state.calMonth.setMonth(state.calMonth.getMonth()+delta);
+  renderCalendar();
+}
+function selectDate(iso){
+  state.visitDate = iso;
+  renderCalendar();
+  renderDateReadout();
+  renderProgress();
+  renderItinerary();
+}
+function quickSelectDate(iso){
+  const d = parseISODate(iso);
+  state.calMonth = new Date(d.getFullYear(), d.getMonth(), 1);
+  selectDate(iso);
+}
+function renderDateReadout(){
+  const el = document.getElementById('dateVal');
+  if(!state.visitDate){ el.textContent = '尚未選擇，點日曆選一天吧'; el.classList.add('empty'); return; }
+  const d = parseISODate(state.visitDate);
+  const wd = WEEKDAYS[d.getDay()];
+  el.textContent = `${d.getFullYear()} 年 ${d.getMonth()+1} 月 ${d.getDate()} 日（週${wd}）`;
+  el.classList.remove('empty');
+}
+
+/* ---------------- travelers ---------------- */
+function adjustTraveler(type, delta){
+  const min = type==='adults' ? 1 : 0;
+  state[type] = Math.min(20, Math.max(min, state[type]+delta));
+  document.getElementById(type+'Val').textContent = state[type];
+  renderItinerary();
+}
+
+/* ---------------- itinerary sidebar ---------------- */
+function renderItinerary(){
+  const schedule = computeSchedule();
+  const totalBudget = totalBudgetMinutes();
+  const usedMinutes = state.selected.reduce((sum,id)=>{ const p=productById(id); return sum + (p?p.duration:0); },0);
+  const pct = totalBudget ? Math.min(100, (usedMinutes/totalBudget)*100) : 0;
+  const over = usedMinutes > totalBudget;
+
+  document.getElementById('itinProgressBar').style.width = pct+'%';
+  document.getElementById('itinProgressBar').classList.toggle('over', over);
+  document.getElementById('itinProgressText').textContent =
+    totalBudget ? `已安排 ${fmtHours(usedMinutes)} / 共 ${fmtHours(totalBudget)}${over?'（略超出，建議移除一項）':''}` : '請先設定可用時間';
+
+  const body = document.getElementById('itinBody');
+  if(state.selected.length===0){
+    body.innerHTML = `<div class="itin-empty">還沒有任何行程項目<br>點選左方遊程即可加入 →</div>`;
+  }else{
+    body.innerHTML = schedule.map((day,di)=>{
+      if(day.items.length===0) return '';
+      return `<div class="itin-day-label">第 ${di+1} 天</div>` + day.items.map((p,ii)=>{
+        const globalIdx = state.selected.indexOf(p.id);
+        return `
+        <div class="itin-item">
+          <div class="itin-time">${minutesToClock(p._start)}</div>
+          <div class="itin-emoji">${p.icon}</div>
+          <div class="itin-info">
+            <div class="nm">${p.name}</div>
+            <div class="mt">${fmtHours(p.duration)} · ${fmtMoney(p.priceAdult*state.adults + p.priceChild*state.children)}${state.children>0?`（大${fmtMoney(p.priceAdult)}・小${fmtMoney(p.priceChild)}）`:''}</div>
+          </div>
+          <div class="itin-actions">
+            <button onclick="moveTour(${globalIdx},-1)" title="上移">▲</button>
+            <button onclick="moveTour(${globalIdx},1)" title="下移">▼</button>
+            <button onclick="toggleTour('${p.id}')" title="移除">✕</button>
+          </div>
+        </div>`;
+      }).join('');
+    }).join('');
+  }
+
+  const total = state.selected.reduce((sum,id)=>{
+    const p = productById(id);
+    if(!p) return sum;
+    return sum + p.priceAdult*state.adults + p.priceChild*state.children;
+  },0);
+  document.getElementById('itinTotal').textContent = fmtMoney(total);
+  document.getElementById('mobileTotal').textContent = fmtMoney(total);
+
+  const count = state.selected.length;
+  document.getElementById('topBadge').textContent = count;
+  document.getElementById('mobileBadge').textContent = count;
+  document.getElementById('itinSubmitBtn').disabled = count===0;
+  document.getElementById('itinClearBtn').style.display = count>0 ? 'inline' : 'none';
+
+  const nextStepEl = document.getElementById('itinNextStep');
+  if(count===0){
+    nextStepEl.style.display = 'none';
+  }else if(!state.visitDate){
+    nextStepEl.textContent = '📅 下一步：回到上方選擇「預計來訪日期」';
+    nextStepEl.style.display = 'block';
+  }else{
+    nextStepEl.textContent = '✅ 都選好了！填寫聯絡資訊送出需求，我們會盡快與你確認細節';
+    nextStepEl.style.display = 'block';
+  }
+}
+function moveTour(idx, dir){
+  const j = idx+dir;
+  if(j<0 || j>=state.selected.length) return;
+  [state.selected[idx], state.selected[j]] = [state.selected[j], state.selected[idx]];
+  renderAll(['itinerary','catalog']);
+}
+function clearItinerary(){
+  if(!confirm('確定要清空目前的行程，重新開始嗎？')) return;
+  state.selected = [];
+  renderAll(['catalog','itinerary','progress']);
+  toast('已清空行程');
+}
+function toggleMobileCart(){
+  state.mobileCartOpen = !state.mobileCartOpen;
+  document.getElementById('sideCol').classList.toggle('mobile-open', state.mobileCartOpen);
+  if(state.mobileCartOpen) document.getElementById('sideCol').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------------- submit order ---------------- */
+function openSubmitModal(){
+  const body = document.getElementById('submitModalBody');
+  body.innerHTML = `
+    <div class="field"><label>姓名 *</label><input id="ctName" placeholder="您的稱呼"></div>
+    <div class="field"><label>聯絡方式（電話或 LINE ID）*</label><input id="ctContact" placeholder="方便聯繫您的方式"></div>
+    <div class="field"><label>備註（飲食禁忌、特殊需求等）</label><textarea id="ctNote" placeholder="選填"></textarea></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" style="flex:1" onclick="submitOrder()">送出</button>
+      <button class="btn btn-ghost" onclick="closeModal('submitOverlay')">取消</button>
+    </div>`;
+  openModal('submitOverlay');
+}
+function submitOrder(){
+  const name = document.getElementById('ctName').value.trim();
+  const contact = document.getElementById('ctContact').value.trim();
+  const note = document.getElementById('ctNote').value.trim();
+  if(!name || !contact){ toast('請填寫姓名與聯絡方式'); return; }
+
+  const schedule = computeSchedule();
+  const items = state.selected.map(id=>{ const p=productById(id); return {id:p.id, name:p.name, duration:p.duration, priceAdult:p.priceAdult, priceChild:p.priceChild}; });
+  const total = items.reduce((s,it)=> s + it.priceAdult*state.adults + it.priceChild*state.children, 0);
+
+  const order = {
+    id:'o'+Date.now(),
+    refCode:'J'+String(Date.now()).slice(-6),
+    createdAt:new Date().toISOString(),
+    visitDate: state.visitDate,
+    days: currentDailyBudgets().length,
+    mode: state.mode,
+    adults: state.adults,
+    children: state.children,
+    items,
+    total,
+    contactName:name, contactPhone:contact, note,
+    status:'待確認',
+  };
+  const orders = loadOrders();
+  orders.unshift(order);
+  saveOrders(orders);
+  backupToCloud(true);
+
+  document.getElementById('submitModalBody').innerHTML = `
+    <div class="success-box">
+      <div class="ic">🌺</div>
+      <h4>已收到您的行程需求！</h4>
+      <p>您的需求單號：<b>${order.refCode}</b><br>我們會盡快透過您留下的聯絡方式與您確認細節。<br>預估總報價：<b>${fmtMoney(total)}</b></p>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="closeModal('submitOverlay')">完成</button>
+    </div>`;
+}
+
+/* ---------------- render orchestrator ---------------- */
+function renderAll(parts){
+  const all = !parts;
+  if(all || parts.includes('progress')) renderProgress();
+  if(all || parts.includes('preset')) renderPresets();
+  if(all || parts.includes('mode')) renderModeGrid();
+  if(all || parts.includes('catalog')){ renderCatFilter(); renderTourGrid(); }
+  if(all || parts.includes('calendar')){ renderCalendar(); renderDateReadout(); }
+  if(all || parts.includes('itinerary')) renderItinerary();
+}
+
+/* ================= ADMIN ================= */
+function openAdminLogin(){
+  document.getElementById('adminPassInput').value='';
+  document.getElementById('adminLoginError').style.display='none';
+  openModal('adminLoginOverlay');
+}
+function tryAdminLogin(){
+  const val = document.getElementById('adminPassInput').value;
+  if(val === getAdminPass()){
+    state.admin.loggedIn = true;
+    closeModal('adminLoginOverlay');
+    openModal('adminOverlay');
+    renderAdmin();
+  }else{
+    document.getElementById('adminLoginError').style.display='block';
+  }
+}
+function adminLogout(){
+  state.admin.loggedIn = false;
+  closeModal('adminOverlay');
+}
+function renderAdmin(){
+  const tabs = [{key:'products',label:'🎟️ 遊程商品'},{key:'orders',label:'📋 客戶行程單'},{key:'backup',label:'☁️ 雲端備份'}];
+  document.getElementById('adminTabs').innerHTML = tabs.map(t=>`
+    <button class="admin-tab ${state.admin.tab===t.key?'active':''}" onclick="setAdminTab('${t.key}')">${t.label}</button>
+  `).join('');
+  const body = document.getElementById('adminTabBody');
+  body.innerHTML = state.admin.tab==='products' ? adminProductsHtml()
+    : state.admin.tab==='orders' ? adminOrdersHtml()
+    : adminBackupHtml();
+}
+function setAdminTab(tab){ state.admin.tab = tab; renderAdmin(); }
+
+function adminProductsHtml(){
+  const rows = PRODUCTS.map(p=>`
+    <tr>
+      <td>${p.image ? `<img class="admin-thumb" src="${p.image}">` : p.icon+' '}${p.name}</td>
+      <td>${p.category}</td>
+      <td>${fmtHours(p.duration)}</td>
+      <td>${fmtMoney(p.priceAdult)} / ${fmtMoney(p.priceChild)}</td>
+      <td><button class="pill-toggle ${p.active?'on':'off'}" onclick="toggleProductActive('${p.id}')">${p.active?'上架中':'已下架'}</button></td>
+      <td style="display:flex;gap:6px;">
+        <button class="mini-btn" onclick="openProductModal('${p.id}')">編輯</button>
+        <button class="mini-btn danger" onclick="deleteProduct('${p.id}')">刪除</button>
+      </td>
+    </tr>`).join('');
+  return `
+    <div class="admin-toolbar">
+      <div style="font-size:12.5px;color:var(--ink-faint);">共 ${PRODUCTS.length} 項遊程</div>
+      <button class="btn btn-primary" onclick="openProductModal(null)">＋ 新增遊程</button>
+    </div>
+    <div style="padding:16px 22px 22px;overflow-x:auto;">
+      <table class="admin-table">
+        <thead><tr><th>名稱</th><th>分類</th><th>時長</th><th>大人/小孩價</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+function toggleProductActive(id){
+  const p = productById(id); p.active = !p.active; saveProducts(PRODUCTS);
+  renderAdmin(); renderAll(['catalog']);
+}
+function deleteProduct(id){
+  if(!confirm('確定要刪除這項遊程嗎？此動作無法復原。')) return;
+  PRODUCTS = PRODUCTS.filter(p=>p.id!==id);
+  saveProducts(PRODUCTS);
+  state.selected = state.selected.filter(sid=>sid!==id);
+  renderAdmin(); renderAll(['catalog','itinerary']);
+}
+function openProductModal(id){
+  state.admin.editingProduct = id;
+  const p = id ? productById(id) : {name:'',category:'',duration:90,priceAdult:0,priceChild:0,icon:'🌿',tags:[],desc:'',active:true,image:null};
+  state.admin.pendingImage = p.image || null;
+  document.getElementById('productModalTitle').textContent = id ? '編輯遊程' : '新增遊程';
+  document.getElementById('productModalBody').innerHTML = `
+    <div class="field-row">
+      <div class="field"><label>圖示 (emoji)</label><input id="pfIcon" value="${p.icon}"></div>
+      <div class="field" style="flex:3"><label>名稱</label><input id="pfName" value="${p.name}"></div>
+    </div>
+    <div class="field">
+      <label>遊程照片（選填，上傳後會取代圖示顯示在遊程卡片上）</label>
+      <div class="photo-upload">
+        <div class="photo-preview" id="pfImagePreview">${p.image ? `<img src="${p.image}">` : `<span>尚未上傳</span>`}</div>
+        <div class="photo-upload-actions">
+          <label class="mini-btn photo-upload-btn">選擇照片<input type="file" accept="image/*" id="pfImageFile" style="display:none" onchange="handleProductImageUpload(this)"></label>
+          <button type="button" class="mini-btn danger" onclick="removeProductImage()">移除照片</button>
+        </div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>分類</label><input id="pfCategory" value="${p.category}"></div>
+      <div class="field"><label>時長（分鐘）</label><input id="pfDuration" type="number" min="15" step="15" value="${p.duration}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>大人價格</label><input id="pfPriceAdult" type="number" min="0" value="${p.priceAdult}"></div>
+      <div class="field"><label>小孩價格</label><input id="pfPriceChild" type="number" min="0" value="${p.priceChild}"></div>
+    </div>
+    <div class="field"><label>標籤（用逗號分隔）</label><input id="pfTags" value="${p.tags.join(',')}"></div>
+    <div class="field"><label>介紹文字</label><textarea id="pfDesc">${p.desc}</textarea></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" style="flex:1" onclick="saveProductForm()">儲存</button>
+      <button class="btn btn-ghost" onclick="closeModal('productModalOverlay')">取消</button>
+    </div>`;
+  openModal('productModalOverlay');
+}
+function handleProductImageUpload(input){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ toast('請選擇圖片檔案'); return; }
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const maxW = 640;
+      const scale = Math.min(1, maxW/img.width);
+      const w = Math.round(img.width*scale), h = Math.round(img.height*scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      state.admin.pendingImage = canvas.toDataURL('image/jpeg', 0.72);
+      renderImagePreview();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+function removeProductImage(){
+  state.admin.pendingImage = null;
+  renderImagePreview();
+}
+function renderImagePreview(){
+  const el = document.getElementById('pfImagePreview');
+  if(!el) return;
+  el.innerHTML = state.admin.pendingImage ? `<img src="${state.admin.pendingImage}">` : `<span>尚未上傳</span>`;
+}
+function saveProductForm(){
+  const name = document.getElementById('pfName').value.trim();
+  if(!name){ toast('請輸入遊程名稱'); return; }
+  const data = {
+    name,
+    icon: document.getElementById('pfIcon').value.trim() || '🌿',
+    image: state.admin.pendingImage,
+    category: document.getElementById('pfCategory').value.trim() || '其他',
+    duration: Math.max(15, parseInt(document.getElementById('pfDuration').value)||60),
+    priceAdult: Math.max(0, parseInt(document.getElementById('pfPriceAdult').value)||0),
+    priceChild: Math.max(0, parseInt(document.getElementById('pfPriceChild').value)||0),
+    tags: document.getElementById('pfTags').value.split(',').map(s=>s.trim()).filter(Boolean),
+    desc: document.getElementById('pfDesc').value.trim(),
+  };
+  if(state.admin.editingProduct){
+    const p = productById(state.admin.editingProduct);
+    Object.assign(p, data);
+  }else{
+    PRODUCTS.push({id:'t'+Date.now(), active:true, ...data});
+  }
+  saveProducts(PRODUCTS);
+  closeModal('productModalOverlay');
+  renderAdmin(); renderAll(['catalog']);
+  toast('已儲存');
+}
+
+function adminOrdersHtml(){
+  const orders = loadOrders();
+  if(orders.length===0){
+    return `<div class="admin-empty">目前還沒有客戶送出行程需求。</div>`;
+  }
+  const rows = orders.map(o=>`
+    <tr>
+      <td>${o.refCode || o.id}</td>
+      <td>${new Date(o.createdAt).toLocaleDateString('zh-Hant-TW')}</td>
+      <td>${o.contactName}<br><span style="color:var(--ink-faint);font-size:11.5px;">${o.contactPhone}</span></td>
+      <td>${o.visitDate || '未指定'}</td>
+      <td>${o.adults} 大 ${o.children} 小</td>
+      <td>${fmtMoney(o.total)}</td>
+      <td>
+        <select class="status-select" onchange="updateOrderStatus('${o.id}', this.value)">
+          ${['待確認','已確認','已完成','取消'].map(s=>`<option ${o.status===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </td>
+      <td style="display:flex;gap:6px;">
+        <button class="mini-btn" onclick="viewWorksheet('${o.id}')">工作單</button>
+        <button class="mini-btn danger" onclick="deleteOrder('${o.id}')">刪除</button>
+      </td>
+    </tr>`).join('');
+  return `
+    <div class="admin-toolbar">
+      <div style="font-size:12.5px;color:var(--ink-faint);">共 ${orders.length} 筆需求</div>
+      <button class="btn btn-ghost" onclick="exportOrdersCsv()">⬇ 匯出 CSV</button>
+    </div>
+    <div style="padding:16px 22px 22px;overflow-x:auto;">
+      <table class="admin-table">
+        <thead><tr><th>單號</th><th>送出日期</th><th>聯絡人</th><th>來訪日期</th><th>人數</th><th>金額</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+function updateOrderStatus(id, status){
+  const orders = loadOrders();
+  const o = orders.find(x=>x.id===id);
+  if(o){ o.status = status; saveOrders(orders); }
+}
+function deleteOrder(id){
+  if(!confirm('確定要刪除這筆客戶資料嗎？')) return;
+  saveOrders(loadOrders().filter(o=>o.id!==id));
+  renderAdmin();
+}
+function viewWorksheet(id){
+  const o = loadOrders().find(x=>x.id===id);
+  if(!o) return;
+  const itemsHtml = o.items.map(it=>`
+    <div class="ws-item"><span>${it.name}（${fmtHours(it.duration)}）</span><span>${fmtMoney(it.priceAdult*o.adults + it.priceChild*o.children)}</span></div>
+  `).join('');
+  document.getElementById('worksheetBody').innerHTML = `
+    <h4>都蘭國 · 客戶工作單</h4>
+    <div style="color:var(--ink-faint);font-size:12px;margin-bottom:14px;">單號：${o.refCode || o.id}　建立於 ${new Date(o.createdAt).toLocaleString('zh-Hant-TW')}</div>
+    <div class="ws-row"><span>聯絡人</span><span>${o.contactName}</span></div>
+    <div class="ws-row"><span>聯絡方式</span><span>${o.contactPhone}</span></div>
+    <div class="ws-row"><span>預計來訪日期</span><span>${o.visitDate || '未指定'}</span></div>
+    <div class="ws-row"><span>天數</span><span>${o.days} 天</span></div>
+    <div class="ws-row"><span>人數</span><span>${o.adults} 大人 / ${o.children} 小孩</span></div>
+    <div class="ws-row"><span>安排方式</span><span>${o.mode==='auto'?'自動安排':'手動挑選'}</span></div>
+    <div class="ws-row"><span>備註</span><span>${o.note || '—'}</span></div>
+    <div class="ws-items">${itemsHtml}</div>
+    <div class="ws-row" style="border-bottom:none;font-weight:800;font-size:15px;"><span>預估總報價</span><span>${fmtMoney(o.total)}</span></div>
+    <div class="ws-row" style="border-bottom:none;"><span>目前狀態</span><span>${o.status}</span></div>
+  `;
+  openModal('worksheetOverlay');
+}
+function exportOrdersCsv(){
+  const orders = loadOrders();
+  if(orders.length===0){ toast('目前沒有可匯出的資料'); return; }
+  const header = ['單號','送出日期','聯絡人','聯絡方式','來訪日期','天數','大人','小孩','總金額','狀態','備註','遊程項目'];
+  const rows = orders.map(o=>[
+    o.refCode || o.id,
+    new Date(o.createdAt).toLocaleString('zh-Hant-TW'),
+    o.contactName, o.contactPhone, o.visitDate||'', o.days, o.adults, o.children, o.total, o.status,
+    (o.note||'').replace(/\n/g,' '), o.items.map(it=>it.name).join('、')
+  ]);
+  const csv = [header, ...rows].map(r=> r.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['﻿'+csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `都蘭國_客戶行程單_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function adminBackupHtml(){
+  const url = getBackupUrl();
+  const lastTime = getLastBackupTime();
+  return `
+    <div style="padding:20px 22px;max-width:560px;">
+      <p style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin:0 0 16px;">
+        把商品與客戶行程單自動同步備份到你自己的 Google 試算表，換裝置或清瀏覽器資料也不會遺失。
+        設定方式：建立一個 Google 試算表 →「擴充功能」→「Apps Script」→ 貼上我提供的程式碼 → 部署為「網頁應用程式」（存取權選「任何人」）→ 把取得的網址貼在下面。
+      </p>
+      <div class="field">
+        <label>Google Apps Script 網頁應用程式網址</label>
+        <input id="backupUrlInput" placeholder="https://script.google.com/macros/s/.../exec" value="${url}">
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveBackupUrlForm()">儲存網址</button>
+        <button class="btn btn-ghost" onclick="backupToCloud(false)">☁️ 立即備份</button>
+      </div>
+      <div style="font-size:11.5px;color:var(--ink-faint);margin-top:12px;">
+        ${lastTime ? '上次備份時間：'+new Date(lastTime).toLocaleString('zh-Hant-TW') : '尚未備份過'}
+      </div>
+      <div style="font-size:11.5px;color:var(--ink-faint);margin-top:4px;">
+        送出新的客戶需求時也會自動嘗試備份一次（背景執行，不影響送出流程）。
+      </div>
+    </div>`;
+}
+function saveBackupUrlForm(){
+  const val = document.getElementById('backupUrlInput').value.trim();
+  setBackupUrl(val);
+  toast(val ? '已儲存備份網址' : '已清空備份網址');
+}
+async function backupToCloud(silent){
+  if(!silent){
+    const input = document.getElementById('backupUrlInput');
+    if(input && input.value.trim()) setBackupUrl(input.value.trim());
+  }
+  const url = getBackupUrl();
+  if(!url){ if(!silent) toast('請先設定備份網址'); return; }
+  try{
+    await fetch(url, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({type:'products', data: PRODUCTS}),
+    });
+    await fetch(url, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({type:'orders', data: loadOrders()}),
+    });
+    setLastBackupTime(new Date().toISOString());
+    if(!silent){ toast('已備份到 Google 試算表'); renderAdmin(); }
+  }catch(e){
+    if(!silent) toast('備份失敗，請確認網址是否正確');
+  }
+}
+
+/* ---------------- init ---------------- */
+function init(){
+  renderAll();
+}
+init();
+</script>
+</body>
+</html>
